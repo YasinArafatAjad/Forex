@@ -8,6 +8,7 @@ const WatchlistWidget = ({
   onMinimize, 
   onMaximize, 
   onPositionChange,
+  onActivate,
   position,
   initialWidth, 
   initialHeight,
@@ -50,6 +51,7 @@ const WatchlistWidget = ({
       onMinimize={onMinimize}
       onMaximize={onMaximize}
       onPositionChange={onPositionChange}
+      onActivate={onActivate}
       position={position}
       initialWidth={initialWidth}
       initialHeight={initialHeight}

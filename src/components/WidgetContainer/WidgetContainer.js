@@ -8,6 +8,7 @@ const WidgetContainer = ({
   onMinimize, 
   onMaximize,
   onPositionChange,
+  onActivate,
   id,
   initialWidth = 400,
   initialHeight = 300,
@@ -16,6 +17,7 @@ const WidgetContainer = ({
   isMaximized = false,
   style = {}
 }) => {
+  const GRID_SIZE = 10;
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [currentPosition, setCurrentPosition] = useState(position);
@@ -31,7 +33,12 @@ const WidgetContainer = ({
 
   const handleMouseDown = (e) => {
     if (isMaximized || isMinimized) return;
-    
+
+    // Ignore drag start when clicking on control buttons
+    if (e.target && (e.target.closest && e.target.closest('.widget-controls'))) {
+      return;
+    }
+    if (e.button !== 0) return; // only left click starts drag
     const rect = widgetRef.current.getBoundingClientRect();
     setDragOffset({
       x: e.clientX - rect.left,
@@ -54,7 +61,11 @@ const WidgetContainer = ({
       workspaceRect.height - size.height
     ));
 
-    const newPosition = { x: newX, y: newY };
+    // Snap to grid for friendlier alignment
+    const snappedX = Math.round(newX / GRID_SIZE) * GRID_SIZE;
+    const snappedY = Math.round(newY / GRID_SIZE) * GRID_SIZE;
+
+    const newPosition = { x: snappedX, y: snappedY };
     setCurrentPosition(newPosition);
     
     if (onPositionChange) {
@@ -79,14 +90,17 @@ const WidgetContainer = ({
     if (!isResizing || isMaximized || isMinimized) return;
 
     const workspaceRect = widgetRef.current.parentElement.getBoundingClientRect();
-    const newWidth = Math.max(200, Math.min(
+    const newWidthRaw = Math.max(200, Math.min(
       e.clientX - workspaceRect.left - currentPosition.x,
       workspaceRect.width - currentPosition.x
     ));
-    const newHeight = Math.max(150, Math.min(
+    const newHeightRaw = Math.max(150, Math.min(
       e.clientY - workspaceRect.top - currentPosition.y,
       workspaceRect.height - currentPosition.y
     ));
+
+    const newWidth = Math.round(newWidthRaw / GRID_SIZE) * GRID_SIZE;
+    const newHeight = Math.round(newHeightRaw / GRID_SIZE) * GRID_SIZE;
 
     setSize({ width: newWidth, height: newHeight });
   };
@@ -175,6 +189,7 @@ const WidgetContainer = ({
       ref={widgetRef}
       className={`widget-container ${isMinimized ? 'minimized' : ''} ${isMaximized ? 'maximized' : ''} ${isDragging ? 'dragging' : ''}`}
       style={getWidgetStyle()}
+      onMouseDown={() => { if (onActivate) onActivate(id); }}
     >
       <div 
         ref={headerRef}

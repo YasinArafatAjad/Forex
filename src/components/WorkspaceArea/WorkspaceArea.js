@@ -16,10 +16,6 @@ const WorkspaceArea = () => {
     bringToFront 
   } = useWorkspace();
 
-  const handleWidgetClick = (widgetId) => {
-    bringToFront(widgetId);
-  };
-
   const renderWidget = (widget) => {
     const commonProps = {
       key: widget.id,
@@ -28,6 +24,7 @@ const WorkspaceArea = () => {
       onMinimize: minimizeWidget,
       onMaximize: maximizeWidget,
       onPositionChange: updateWidgetPosition,
+      onActivate: bringToFront,
       position: widget.position,
       initialWidth: widget.size?.width || 400,
       initialHeight: widget.size?.height || 300,
@@ -53,15 +50,7 @@ const WorkspaceArea = () => {
       }
     })();
 
-    return (
-      <div 
-        key={widget.id}
-        onClick={() => handleWidgetClick(widget.id)}
-        style={{ position: 'relative' }}
-      >
-        {widgetElement}
-      </div>
-    );
+    return widgetElement;
   };
 
   return (
