@@ -106,7 +106,7 @@ const WidgetContainer = ({
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging, dragOffset, size]);
+  }, [isDragging, dragOffset, size, handleMouseMove, handleMouseUp]);
 
   useEffect(() => {
     if (isResizing) {
@@ -118,7 +118,7 @@ const WidgetContainer = ({
       document.removeEventListener('mousemove', handleResize);
       document.removeEventListener('mouseup', handleResizeEnd);
     };
-  }, [isResizing, currentPosition]);
+  }, [isResizing, currentPosition, handleResize, handleResizeEnd]);
 
   const handleMinimize = () => {
     if (onMinimize) onMinimize(id);
