@@ -30,12 +30,17 @@ export const WorkspaceProvider = ({ children }) => {
 
   // Add a new widget to the workspace
   const addWidget = (type, initialProps = {}) => {
+    // Calculate position to avoid overlap
+    const baseOffset = widgets.length * 30;
+    const xOffset = baseOffset % 200;
+    const yOffset = Math.floor(baseOffset / 200) * 50;
+    
     const newWidget = {
       id: `widget-${nextWidgetId}`,
       type,
       position: {
-        x: 20 + (widgets.length * 20) % 100,
-        y: 20 + (widgets.length * 20) % 100
+        x: 20 + xOffset,
+        y: 20 + yOffset
       },
       ...initialProps
     };
@@ -58,12 +63,17 @@ export const WorkspaceProvider = ({ children }) => {
     ));
   };
 
+  // Clear all widgets
+  const clearWorkspace = () => {
+    setWidgets([]);
+  };
   return (
     <WorkspaceContext.Provider value={{ 
       widgets, 
       addWidget, 
       removeWidget, 
-      updateWidget 
+      updateWidget,
+      clearWorkspace
     }}>
       {children}
     </WorkspaceContext.Provider>

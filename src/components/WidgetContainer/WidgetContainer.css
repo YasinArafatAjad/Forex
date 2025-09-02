@@ -11,6 +11,7 @@
   min-width: 200px;
   min-height: 150px;
   resize: both;
+  cursor: default;
 }
 
 .widget-container.maximized {
@@ -28,6 +29,11 @@
   resize: none;
 }
 
+.widget-container:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #b21515;
+}
+
 .widget-header {
   display: flex;
   justify-content: space-between;
@@ -36,17 +42,23 @@
   background-color: #f8f9fa;
   border-bottom: 1px solid #e9ecef;
   cursor: move;
+  user-select: none;
 }
 
 .widget-title {
   font-size: 14px;
   font-weight: 500;
   color: #495057;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 .widget-controls {
   display: flex;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .widget-control {
@@ -96,6 +108,12 @@
   height: 10px;
   cursor: nwse-resize;
   background: linear-gradient(135deg, transparent 50%, #6c757d 50%, #6c757d 60%, transparent 60%);
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.widget-container:hover::after {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
@@ -110,6 +128,7 @@
   
   .widget-title {
     font-size: 13px;
+    max-width: 150px;
   }
   
   .widget-control {

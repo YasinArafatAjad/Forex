@@ -9,7 +9,8 @@ const WidgetContainer = ({
   onMaximize,
   id,
   initialWidth = '100%',
-  initialHeight = '300px'
+  initialHeight = '300px',
+  style = {}
 }) => {
   const [isMinimized, setIsMinimized] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
@@ -32,6 +33,7 @@ const WidgetContainer = ({
     <div 
       className={`widget-container ${isMinimized ? 'minimized' : ''} ${isMaximized ? 'maximized' : ''}`}
       style={{ 
+        ...style,
         width: isMaximized ? '100%' : initialWidth,
         height: isMaximized ? '100%' : (isMinimized ? '40px' : initialHeight)
       }}

@@ -29,3 +29,29 @@
     font-size: 16px;
     color: #6c757d;
 }
+
+/* Widget positioning styles */
+.workspace-area .widget-container {
+    position: absolute;
+    min-width: 300px;
+    min-height: 250px;
+}
+
+@media (max-width: 768px) {
+    .workspace-area {
+        padding: 10px;
+    }
+    
+    .workspace-area .widget-container {
+        min-width: 280px;
+        min-height: 200px;
+    }
+    
+    .workspace-title {
+        font-size: 20px;
+    }
+    
+    .workspace-subtitle {
+        font-size: 14px;
+    }
+}
