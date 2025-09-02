@@ -121,6 +121,8 @@ const TradesWidget = ({
               Select an instrument to display chart
             </div>
           )}
+        )
+        }
         </div>
       </div>
     </WidgetContainer>
