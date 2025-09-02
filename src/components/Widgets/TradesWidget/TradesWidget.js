@@ -115,24 +115,3 @@ const TradesWidget = ({
 };
 
 export default TradesWidget;
-            <div className="no-trades-message">
-              No trades available
-            </div>
-          </div>
-          {symbol ? (
-            <div className="chart-symbol-info">
-              <div className="symbol-name">{symbol}</div>
-              <div className="symbol-price">Chart will be displayed here</div>
-            </div>
-          ) : (
-            <div className="chart-message">
-              Select an instrument to display chart
-            </div>
-          )}
-        )}
-      </div>
-    </WidgetContainer>
-  );
-};
-
-export default TradesWidget;
