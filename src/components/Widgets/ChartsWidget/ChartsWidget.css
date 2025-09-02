@@ -1,0 +1,30 @@
+.charts-widget {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 20px;
+  height: 100%;
+}
+
+.chart-icon {
+  margin-bottom: 16px;
+  color: #6c757d;
+  opacity: 0.6;
+}
+
+.chart-message {
+  font-size: 14px;
+  color: #6c757d;
+  text-align: center;
+}

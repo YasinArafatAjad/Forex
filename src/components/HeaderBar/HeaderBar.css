@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.header-bar-container {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 50px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.header-metrics-container {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Tüm metrics arasında 40px aralık */
+    flex: 1;
+}
+
+.metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+
+/* Vertical separator lines between metrics */
+.metric-item:not(:last-child)::after {
+    display: none;
+}
+
+/* Balance, Credit, Equity metrics - closer spacing */
+.balance-metric,
+.credit-metric,
+.equity-metric {
+    margin-right: 0; /* Negatif margin'ı kaldır */
+}
+
+.balance-metric::after,
+.credit-metric::after,
+.equity-metric::after {
+    display: none;
+}
+
+.metric-label {
+    font-size: 14px; /* Tüm labels için aynı font size */
+    color: #6c757d;
+    font-weight: 500;
+    margin-bottom: 2px;
+    line-height: 1.2;
+    font-family: 'Inter', sans-serif; /* Tutarlı font family */
+}
+
+/* Tüm metric label'ları için aynı font size garantisi */
+.balance-metric .metric-label,
+.credit-metric .metric-label,
+.equity-metric .metric-label,
+.margin-metric .metric-label,
+.margin-level-metric .metric-label,
+.unrealized-pl-metric .metric-label {
+    font-size: 14px; /* Hepsi için aynı */
+}
+
+.metric-value {
+    font-size: 12px;
+    color: #212529;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Balance Metric */
+.balance-metric .metric-value {
+    color: #212529;
+}
+
+/* Credit Metric */
+.credit-metric .metric-value {
+    color: #212529;
+}
+
+/* Equity Metric */
+.equity-metric .metric-value {
+    color: #212529;
+}
+
+/* Margin Metric */
+.margin-metric .metric-value {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.margin-used {
+    color: #fd7e14;
+}
+
+.margin-separator {
+    color: #6c757d;
+    font-weight: 400;
+}
+
+.margin-free {
+    color: #0d6efd;
+}
+
+/* Margin Level Metric */
+.margin-level-metric {
+    margin-left: 0; /* 30px margin'ı kaldır */
+}
+
+.margin-level-metric::after {
+    display: none; /* ::after pseudo-element'i kaldır */
+}
+
+.margin-level-metric .metric-value {
+    color: #212529;
+}
+
+/* Unrealized P/L Metric */
+.unrealized-pl-metric .metric-value {
+    font-size: 14px; /* 15px'den 1px küçültüldü */
+}
+
+.unrealized-pl-metric .metric-value.positive {
+    color: #198754;
+}
+
+.unrealized-pl-metric .metric-value.negative {
+    color: #dc3545;
+}
+
+/* Profile Section */
+.profile-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 15px; /* Profile menu'yu 15px aşağıya taşı */
+}
+
+.profile-menu-trigger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0; /* Padding'i kaldır */
+    background-color: transparent; /* Arka plan rengini kaldır */
+    border: none; /* Border'ı kaldır */
+    border-radius: 0; /* Border radius'ı kaldır */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.profile-menu-trigger:hover {
+    background-color: transparent; /* Hover'da da arka plan yok */
+    border-color: transparent; /* Hover'da da border yok */
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #212529;
+    line-height: 1.2;
+}
+
+.profile-title .usd-part {
+    font-weight: 400;
+    color: #6c757d;
+}
+
+.profile-subtitle {
+    font-size: 12px;
+    color: #6c757d;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.profile-arrow {
+    font-size: 12px;
+    color: #6c757d;
+    transition: transform 0.2s ease;
+}
+
+.profile-menu-trigger:hover .profile-arrow {
+    transform: rotate(180deg);
+}
+
+/* Profile Dropdown Menu */
+.profile-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 9px;
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+.menu-item:hover {
+    background-color: #f8f9fa;
+}
+
+.menu-item:hover .menu-icon svg {
+    transform: scale(1.1);
+}
+
+.menu-item:hover .menu-icon svg path {
+    fill: #b21515;
+}
+
+.menu-item:hover .menu-text {
+    color: #b21515 !important;
+    font-weight: 400;
+}
+
+.menu-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.menu-icon svg {
+    transition: fill 0.2s ease;
+}
+
+.menu-icon svg path {
+    fill: #767676;
+    transition: fill 0.2s ease;
+}
+
+.menu-text {
+    font-size: 14px;
+    color: #767676;
+    font-weight: 300;
+    font-family: 'Inter', sans-serif;
+    transition: color 0.2s ease;
+}
+
+/* Time Zone Metric */
+.time-zone-metric .metric-value {
+    font-family: 'Courier New', monospace; /* Saat için monospace font */
+}
+
+@media (max-width: 768px) {
+    .header-bar-container {
+        padding: 6px 15px;
+        min-height: 46px;
+    }
+    
+    .header-metrics-container {
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+    
+    .metric-item {
+        min-width: 100px;
+    }
+    
+    /* Adjust separator position for mobile */
+    .metric-item:not(:last-child)::after {
+        right: -5px;
+        height: 25px;
+    }
+    
+    .metric-label {
+        font-size: 11px;
+    }
+    
+    .metric-value {
+        font-size: 13px;
+    }
+
+    .profile-menu-trigger {
+        padding: 6px 12px;
+    }
+    
+    .profile-title {
+        font-size: 13px;
+    }
+    
+    .profile-subtitle {
+        font-size: 11px;
+    }
+    
+    .profile-dropdown-menu {
+        min-width: 180px;
+    }
+    
+    .menu-item {
+        padding: 10px 14px;
+    }
+    
+    .menu-text {
+        font-size: 13px;
+        font-weight: 300;
+        font-family: 'Inter', sans-serif;
+    }
+}

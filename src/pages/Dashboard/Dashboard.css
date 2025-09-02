@@ -1,0 +1,44 @@
+.dashboard-wrapper {
+    height: 100vh;
+    display: flex;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.workspace-area {
+    flex: 1;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #6c757d;
+}
+
+.workspace-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #495057;
+}
+
+.workspace-subtitle {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+    .workspace-title {
+        font-size: 16px;
+    }
+    
+    .workspace-subtitle {
+        font-size: 12px;
+    }
+}

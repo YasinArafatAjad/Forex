@@ -1,0 +1,70 @@
+.trades-widget {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+.trades-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.trades-table th,
+.trades-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.trades-table th {
+  font-weight: 500;
+  color: #495057;
+  background-color: #f8f9fa;
+  position: sticky;
+  top: 0;
+}
+
+.trades-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.buy-type {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.sell-type {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.positive {
+  color: #28a745;
+}
+
+.negative {
+  color: #dc3545;
+}
+
+.no-trades {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.no-trades-icon {
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.no-trades-message {
+  font-size: 14px;
+  text-align: center;
+}

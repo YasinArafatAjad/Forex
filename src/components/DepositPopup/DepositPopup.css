@@ -1,0 +1,572 @@
+.deposit-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.deposit-popup {
+  background: white;
+  border-radius: 12px;
+  width: 500px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Header */
+.deposit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px 4px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.deposit-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.deposit-close-button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #f5f5f5;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.deposit-close-button:hover {
+  background: #e0e0e0;
+  color: #333;
+}
+
+/* Tabs */
+.deposit-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid #e0e0e0;
+  margin: 0 15px;
+}
+
+.deposit-tab-button {
+  flex: 1;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.deposit-tab-button.active {
+  color: #b21515;
+  background: none;
+  border-bottom: 2px solid #b21515;
+}
+
+/* Content */
+.deposit-content {
+  padding: 20px;
+}
+
+.info-section {
+  margin-bottom: 24px;
+}
+
+.info-section h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.info-section p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Deposit Area Content */
+.deposit-form {
+  margin-bottom: 24px;
+}
+
+.deposit-form-group {
+  margin-bottom: 20px;
+}
+
+.deposit-form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.deposit-form-input,
+.deposit-form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fafafa;
+  transition: border-color 0.2s;
+}
+
+.deposit-form-input:focus,
+.deposit-form-select:focus {
+  outline: none;
+  border-color: #b21515;
+  background: white;
+}
+
+.deposit-form-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fafafa;
+  resize: vertical;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.deposit-form-textarea:focus {
+  outline: none;
+  border-color: #b21515;
+  background: white;
+}
+
+/* Deposit Summary */
+.deposit-summary {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 14px;
+  color: #333;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-row.total {
+  font-weight: 600;
+  font-size: 16px;
+  color: #b21515;
+}
+
+.amount,
+.fee,
+.total-amount {
+  font-weight: 600;
+}
+
+/* Action Buttons */
+.deposit-action-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.proceed-button {
+  padding: 14px 32px;
+  background: #b21515;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-width: 200px;
+}
+
+.proceed-button:hover {
+  background: #8f1111;
+}
+
+.proceed-button:active {
+  transform: translateY(1px);
+}
+
+.proceed-button.disabled {
+  background: #cccccc;
+  color: #999999;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.proceed-button.disabled:hover {
+  background: #cccccc;
+  transform: none;
+}
+
+.proceed-button.disabled:active {
+  transform: none;
+}
+
+/* Bank Transfer Content */
+.bank-details {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.detail-value {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  text-align: right;
+  max-width: 200px;
+  word-break: break-all;
+}
+
+.detail-value-with-copy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.detail-value-with-copy .detail-value {
+  max-width: 180px;
+  text-align: right;
+}
+
+.copy-icon-button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: #f5f5f5;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.copy-icon-button:hover {
+  background: #b21515;
+  color: white;
+}
+
+.copy-icon-button:active {
+  transform: scale(0.95);
+}
+
+/* Crypto Content */
+.crypto-options {
+  margin-bottom: 24px;
+}
+
+.crypto-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+}
+
+.crypto-option:hover {
+  border-color: #b21515;
+}
+
+.crypto-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.crypto-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.crypto-network {
+  font-size: 12px;
+  color: #666;
+}
+
+.copy-button {
+  padding: 8px 16px;
+  background: #b21515;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.copy-button:hover {
+  background: #8f1111;
+}
+
+/* Important Notes */
+.important-note {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.important-note h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #856404;
+}
+
+.important-note ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.important-note li {
+  font-size: 13px;
+  color: #856404;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.important-note li:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .deposit-popup {
+    width: 95vw;
+    margin: 20px;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .detail-value {
+    text-align: left;
+    max-width: none;
+  }
+  
+  .crypto-option {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .copy-button {
+    align-self: stretch;
+  }
+}
+
+/* Quick Amount Buttons */
+.quick-amounts {
+  margin-bottom: 20px;
+}
+
+.amount-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.quick-amount-btn {
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: white;
+  color: #666;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 60px;
+}
+
+.quick-amount-btn:hover {
+  border-color: #b21515;
+  color: #b21515;
+}
+
+.quick-amount-btn.active {
+  background: #b21515;
+  border-color: #b21515;
+  color: white;
+}
+
+/* Bank Details Popup */
+.bank-details-overlay,
+.crypto-details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.bank-details-popup,
+.crypto-details-popup {
+  background: white;
+  border-radius: 12px;
+  width: 500px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.bank-details-header,
+.crypto-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px 4px 20px;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.bank-details-header h3,
+.crypto-details-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.bank-details-close-button,
+.crypto-details-close-button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #f5f5f5;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.bank-details-close-button:hover,
+.crypto-details-close-button:hover {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.bank-details-content,
+.crypto-details-content {
+  padding: 20px;
+}
+
+/* Commission styling */
+.commission {
+  font-weight: 600;
+}
+
+/* Confirm Deposit Button */
+.confirm-deposit-button {
+  padding: 14px 32px;
+  background: #b21515;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-width: 200px;
+  margin: 10px auto 0 auto;
+  display: block;
+}
+
+.confirm-deposit-button:hover {
+  background: #8f1111;
+}
+
+.confirm-deposit-button:active {
+  transform: translateY(1px);
+}
+
+/* Responsive Design for Quick Amount Buttons */
+@media (max-width: 600px) {
+  .amount-buttons {
+    justify-content: center;
+  }
+  
+  .quick-amount-btn {
+    min-width: 50px;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}
