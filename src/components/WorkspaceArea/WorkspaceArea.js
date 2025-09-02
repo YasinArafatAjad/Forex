@@ -14,8 +14,8 @@ const WorkspaceArea = () => {
       key: widget.id,
       id: widget.id,
       onClose: removeWidget,
-      initialWidth: '400px',
-      initialHeight: '300px',
+      initialWidth: '100%',
+      initialHeight: '100%',
       style: {
         position: 'absolute',
         left: widget.position.x,
