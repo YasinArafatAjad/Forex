@@ -39,8 +39,17 @@ export const WorkspaceProvider = ({ children }) => {
     // Arrange widgets side by side (two columns) by default
     const index = widgets.length;
     const gap = 20;
-    const defaultWidth = (initialProps.size && initialProps.size.width) ? initialProps.size.width : 400;
-    const defaultHeight = (initialProps.size && initialProps.size.height) ? initialProps.size.height : 300;
+
+    // Derive a dynamic default height from the viewport when not provided
+    const viewportHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
+    const dynamicDefaultHeight = Math.max(300, viewportHeight - 120);
+
+    const defaultWidth = (initialProps.size && initialProps.size.width)
+      ? initialProps.size.width
+      : 400;
+    const defaultHeight = (initialProps.size && initialProps.size.height)
+      ? initialProps.size.height
+      : dynamicDefaultHeight;
     const columns = 2; // two widgets per row by default
     const col = index % columns;
     const row = Math.floor(index / columns);
@@ -59,7 +68,10 @@ export const WorkspaceProvider = ({ children }) => {
         height: defaultHeight
       },
       isMinimized: false,
-      isMaximized: false,
+      // Auto-maximize the first widget unless explicitly specified in initialProps
+      isMaximized: (typeof initialProps.isMaximized === 'boolean')
+        ? initialProps.isMaximized
+        : index === 0,
       ...initialProps
     };
     
