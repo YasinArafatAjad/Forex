@@ -50,6 +50,12 @@ const SettingsPopup = ({ isOpen, onClose }) => {
     setIsTimezoneDropdownOpen(false);
   };
 
+  const handleLanguageSelect = (selectedLanguage, e) => {
+    e.stopPropagation(); // Prevent event from bubbling up
+    setLanguage(selectedLanguage);
+    setIsLanguageDropdownOpen(false);
+  };
+
   const handleLanguageDropdownToggle = (e) => {
     e.stopPropagation(); // Prevent event from bubbling up
     setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
