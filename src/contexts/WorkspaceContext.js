@@ -14,7 +14,13 @@ export const WorkspaceProvider = ({ children }) => {
     const savedNextId = localStorage.getItem('workspaceNextWidgetId');
     
     if (savedWidgets) {
-      setWidgets(JSON.parse(savedWidgets));
+      try {
+        const parsedWidgets = JSON.parse(savedWidgets);
+        setWidgets(parsedWidgets);
+      } catch (error) {
+        console.error('Error loading saved widgets:', error);
+        setWidgets([]);
+      }
     }
     
     if (savedNextId) {
@@ -31,21 +37,27 @@ export const WorkspaceProvider = ({ children }) => {
   // Add a new widget to the workspace
   const addWidget = (type, initialProps = {}) => {
     // Calculate position to avoid overlap
-    const baseOffset = widgets.length * 30;
-    const xOffset = baseOffset % 200;
-    const yOffset = Math.floor(baseOffset / 200) * 50;
+    const baseOffset = widgets.length * 40;
+    const xOffset = (baseOffset % 300) + 20;
+    const yOffset = Math.floor(baseOffset / 300) * 60 + 20;
     
     const newWidget = {
       id: `widget-${nextWidgetId}`,
       type,
       position: {
-        x: 20 + xOffset,
-        y: 20 + yOffset
+        x: xOffset,
+        y: yOffset
       },
+      size: {
+        width: 400,
+        height: 300
+      },
+      isMinimized: false,
+      isMaximized: false,
       ...initialProps
     };
     
-    setWidgets([...widgets, newWidget]);
+    setWidgets(prev => [...prev, newWidget]);
     setNextWidgetId(nextWidgetId + 1);
     
     return newWidget.id;
@@ -53,27 +65,66 @@ export const WorkspaceProvider = ({ children }) => {
 
   // Remove a widget from the workspace
   const removeWidget = (widgetId) => {
-    setWidgets(widgets.filter(widget => widget.id !== widgetId));
+    setWidgets(prev => prev.filter(widget => widget.id !== widgetId));
   };
 
   // Update a widget's properties
   const updateWidget = (widgetId, updates) => {
-    setWidgets(widgets.map(widget => 
+    setWidgets(prev => prev.map(widget => 
       widget.id === widgetId ? { ...widget, ...updates } : widget
+    ));
+  };
+
+  // Update widget position
+  const updateWidgetPosition = (widgetId, newPosition) => {
+    setWidgets(prev => prev.map(widget => 
+      widget.id === widgetId ? { ...widget, position: newPosition } : widget
+    ));
+  };
+
+  // Minimize/Maximize widget
+  const minimizeWidget = (widgetId) => {
+    setWidgets(prev => prev.map(widget => 
+      widget.id === widgetId 
+        ? { ...widget, isMinimized: !widget.isMinimized, isMaximized: false }
+        : widget
+    ));
+  };
+
+  const maximizeWidget = (widgetId) => {
+    setWidgets(prev => prev.map(widget => 
+      widget.id === widgetId 
+        ? { ...widget, isMaximized: !widget.isMaximized, isMinimized: false }
+        : widget
     ));
   };
 
   // Clear all widgets
   const clearWorkspace = () => {
     setWidgets([]);
+    setNextWidgetId(1);
   };
+
+  // Bring widget to front
+  const bringToFront = (widgetId) => {
+    setWidgets(prev => {
+      const widget = prev.find(w => w.id === widgetId);
+      const otherWidgets = prev.filter(w => w.id !== widgetId);
+      return [...otherWidgets, widget];
+    });
+  };
+
   return (
     <WorkspaceContext.Provider value={{ 
       widgets, 
       addWidget, 
       removeWidget, 
       updateWidget,
-      clearWorkspace
+      updateWidgetPosition,
+      minimizeWidget,
+      maximizeWidget,
+      clearWorkspace,
+      bringToFront
     }}>
       {children}
     </WorkspaceContext.Provider>

@@ -2,8 +2,21 @@ import React, { useState } from 'react';
 import WidgetContainer from '../../WidgetContainer';
 import './WatchlistWidget.css';
 
-const WatchlistWidget = ({ id, onClose, initialWidth, initialHeight }) => {
-  const [activeTab, setActiveTab] = useState('popular');
+const WatchlistWidget = ({ 
+  id, 
+  onClose, 
+  onMinimize, 
+  onMaximize, 
+  onPositionChange,
+  position,
+  initialWidth, 
+  initialHeight,
+  isMinimized,
+  isMaximized,
+  activeTab: initialActiveTab = 'popular',
+  style = {}
+}) => {
+  const [activeTab, setActiveTab] = useState(initialActiveTab);
   
   // Sample watchlist data
   const watchlistData = {
@@ -34,8 +47,15 @@ const WatchlistWidget = ({ id, onClose, initialWidth, initialHeight }) => {
       title="Watchlist" 
       id={id}
       onClose={onClose}
+      onMinimize={onMinimize}
+      onMaximize={onMaximize}
+      onPositionChange={onPositionChange}
+      position={position}
       initialWidth={initialWidth}
       initialHeight={initialHeight}
+      isMinimized={isMinimized}
+      isMaximized={isMaximized}
+      style={style}
     >
       <div className="watchlist-widget">
         <div className="watchlist-tabs">

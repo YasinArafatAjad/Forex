@@ -15,6 +15,7 @@
   border-radius: 4px;
   padding: 20px;
   height: 100%;
+  min-height: 150px;
 }
 
 .chart-icon {
@@ -40,6 +41,7 @@
   border-radius: 8px;
   border: 1px solid #e9ecef;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  max-width: 200px;
 }
 
 .symbol-name {
@@ -53,4 +55,5 @@
   font-size: 14px;
   color: #6c757d;
   font-weight: 500;
+  text-align: center;
 }

@@ -7,43 +7,75 @@ import WatchlistWidget from '../Widgets/WatchlistWidget';
 import './WorkspaceArea.css';
 
 const WorkspaceArea = () => {
-  const { widgets, removeWidget } = useWorkspace();
+  const { 
+    widgets, 
+    removeWidget, 
+    updateWidgetPosition, 
+    minimizeWidget, 
+    maximizeWidget,
+    bringToFront 
+  } = useWorkspace();
+
+  const handleWidgetClick = (widgetId) => {
+    bringToFront(widgetId);
+  };
 
   const renderWidget = (widget) => {
     const commonProps = {
       key: widget.id,
       id: widget.id,
       onClose: removeWidget,
-      initialWidth: '100%',
-      initialHeight: '100%',
+      onMinimize: minimizeWidget,
+      onMaximize: maximizeWidget,
+      onPositionChange: updateWidgetPosition,
+      position: widget.position,
+      initialWidth: widget.size?.width || 400,
+      initialHeight: widget.size?.height || 300,
+      isMinimized: widget.isMinimized || false,
+      isMaximized: widget.isMaximized || false,
       style: {
-        position: 'absolute',
-        left: widget.position.x,
-        top: widget.position.y,
-        zIndex: 1
+        zIndex: widget.isMaximized ? 1000 : 10
       }
     };
 
-    switch (widget.type) {
-      case 'charts':
-        return <ChartsWidget {...commonProps} symbol={widget.symbol} />;
-      case 'positions':
-        return <PositionsWidget {...commonProps} />;
-      case 'trades':
-        return <TradesWidget {...commonProps} />;
-      case 'watchlist':
-        return <WatchlistWidget {...commonProps} activeTab={widget.activeTab} />;
-      default:
-        return null;
-    }
+    const widgetElement = (() => {
+      switch (widget.type) {
+        case 'charts':
+          return <ChartsWidget {...commonProps} symbol={widget.symbol} />;
+        case 'positions':
+          return <PositionsWidget {...commonProps} />;
+        case 'trades':
+          return <TradesWidget {...commonProps} />;
+        case 'watchlist':
+          return <WatchlistWidget {...commonProps} activeTab={widget.activeTab} />;
+        default:
+          return null;
+      }
+    })();
+
+    return (
+      <div 
+        key={widget.id}
+        onClick={() => handleWidgetClick(widget.id)}
+        style={{ position: 'relative' }}
+      >
+        {widgetElement}
+      </div>
+    );
   };
 
   return (
     <div className="workspace-area">
       {widgets.length === 0 ? (
         <div className="workspace-empty">
-          <div className="workspace-title">Workspace Area</div>
-          <div className="workspace-subtitle">Add widgets from the sidebar to build your custom workspace</div>
+          <div className="workspace-icon">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 8H24V24H8V8ZM40 8H56V24H40V8ZM8 40H24V56H8V40ZM40 40H56V56H40V40Z" stroke="#6c757d" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              <path d="M32 16H32.01M32 32H32.01M16 32H16.01M48 32H48.01M32 48H32.01" stroke="#6c757d" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div className="workspace-title">Welcome to Your Trading Workspace</div>
+          <div className="workspace-subtitle">Click the grid icon in the sidebar to add widgets and customize your trading environment</div>
         </div>
       ) : (
         widgets.map(renderWidget)
