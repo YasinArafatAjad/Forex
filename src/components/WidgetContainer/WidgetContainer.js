@@ -8,6 +8,7 @@ const WidgetContainer = ({
   onMinimize, 
   onMaximize,
   onPositionChange,
+  onActivate,
   id,
   initialWidth = 400,
   initialHeight = 300,
@@ -38,6 +39,7 @@ const WidgetContainer = ({
       y: e.clientY - rect.top
     });
     setIsDragging(true);
+    if (onActivate) onActivate();
     e.preventDefault();
   };
 
@@ -175,6 +177,7 @@ const WidgetContainer = ({
       ref={widgetRef}
       className={`widget-container ${isMinimized ? 'minimized' : ''} ${isMaximized ? 'maximized' : ''} ${isDragging ? 'dragging' : ''}`}
       style={getWidgetStyle()}
+      onMouseDown={() => { if (onActivate) onActivate(); }}
     >
       <div 
         ref={headerRef}
