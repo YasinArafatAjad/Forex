@@ -8,6 +8,7 @@ const TradesWidget = ({
   onMinimize, 
   onMaximize, 
   onPositionChange,
+  onActivate,
   position,
   initialWidth, 
   initialHeight,
@@ -63,6 +64,7 @@ const TradesWidget = ({
       onMinimize={onMinimize}
       onMaximize={onMaximize}
       onPositionChange={onPositionChange}
+      onActivate={onActivate}
       position={position}
       initialWidth={initialWidth}
       initialHeight={initialHeight}

@@ -8,6 +8,7 @@ const ChartsWidget = ({
   onMinimize, 
   onMaximize, 
   onPositionChange,
+  onActivate,
   position,
   initialWidth, 
   initialHeight, 
@@ -24,6 +25,7 @@ const ChartsWidget = ({
       onMinimize={onMinimize}
       onMaximize={onMaximize}
       onPositionChange={onPositionChange}
+      onActivate={onActivate}
       position={position}
       initialWidth={initialWidth}
       initialHeight={initialHeight}

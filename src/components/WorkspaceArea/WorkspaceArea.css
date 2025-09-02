@@ -37,12 +37,8 @@
   line-height: 1.5;
 }
 
-/* Ensure widgets are positioned correctly */
-.workspace-area > div {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
+/* Ensure widgets are positioned correctly by making the workspace a positioning context */
+/* Children (widgets) are absolutely positioned within this container */
 
 /* Prevent scrollbars on the workspace */
 .workspace-area {
