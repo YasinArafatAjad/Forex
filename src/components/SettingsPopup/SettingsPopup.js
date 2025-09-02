@@ -44,12 +44,6 @@ const SettingsPopup = ({ isOpen, onClose }) => {
   // Removed click-outside behavior - only X button closes
   const handleClose = () => {};
 
-  const handleOutsideClick = (e) => {
-    e.stopPropagation(); // Prevent event from bubbling up
-    setLanguage(selectedLanguage);
-    setIsLanguageDropdownOpen(false);
-  };
-
   const handleTimezoneSelect = (selectedTimezone, e) => {
     e.stopPropagation(); // Prevent event from bubbling up
     setTimezone(selectedTimezone);

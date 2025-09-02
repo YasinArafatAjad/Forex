@@ -101,9 +101,20 @@ const TradesWidget = ({
                     {trade.profit}
                   </td>
                 </tr>
-              )
-              )
-              }
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="no-trades-message">
+            No trades available
+          </div>
+        )}
+      </div>
+    </WidgetContainer>
+  );
+};
+
+export default TradesWidget;
             <div className="no-trades-message">
               No trades available
             </div>
