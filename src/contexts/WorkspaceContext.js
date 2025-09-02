@@ -36,10 +36,16 @@ export const WorkspaceProvider = ({ children }) => {
 
   // Add a new widget to the workspace
   const addWidget = (type, initialProps = {}) => {
-    // Calculate position to avoid overlap
-    const baseOffset = widgets.length * 40;
-    const xOffset = (baseOffset % 300) + 20;
-    const yOffset = Math.floor(baseOffset / 300) * 60 + 20;
+    // Arrange widgets side by side (two columns) by default
+    const index = widgets.length;
+    const gap = 20;
+    const defaultWidth = (initialProps.size && initialProps.size.width) ? initialProps.size.width : 400;
+    const defaultHeight = (initialProps.size && initialProps.size.height) ? initialProps.size.height : 300;
+    const columns = 2; // two widgets per row by default
+    const col = index % columns;
+    const row = Math.floor(index / columns);
+    const xOffset = col * (defaultWidth + gap) + gap;
+    const yOffset = row * (defaultHeight + gap) + gap;
     
     const newWidget = {
       id: `widget-${nextWidgetId}`,
@@ -49,8 +55,8 @@ export const WorkspaceProvider = ({ children }) => {
         y: yOffset
       },
       size: {
-        width: 400,
-        height: 300
+        width: defaultWidth,
+        height: defaultHeight
       },
       isMinimized: false,
       isMaximized: false,
